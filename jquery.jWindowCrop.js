@@ -28,20 +28,20 @@
 			base.options = $.extend({},$.jWindowCrop.defaultOptions, options);
 			if(base.options.zoomSteps < 2) base.options.zoomSteps = 2;
 
-			base.$image.addClass('jwc_image').wrap('<div class="jwc_frame" />'); // wrap image in frame
+			base.$image.addClass('jwc_image').wrap('<div class="jwc_frame img-circle" />'); // wrap image in frame
 			base.$frame = base.$image.parent();
 			base.$frame.append('<div class="jwc_loader">' + base.options.loadingText + '</div>');
-			base.$frame.append('<div class="jwc_controls" style="display:'+(base.options.showControlsOnStart ? 'block' : 'none')+';"><span>click to drag</span><a href="#" class="jwc_zoom_in"></a><a href="#" class="jwc_zoom_out"></a></div>');
+      base.$frame.after('<div class="jwc_controls" style="display:'+(base.options.showControlsOnStart ? 'block' : 'none')+';"><span>click to drag</span><a href="#" class="jwc_zoom_in"></a><a href="#" class="jwc_zoom_out"></a></div>');
 			base.$frame.css({'overflow': 'hidden', 'position': 'relative', 'width': base.options.targetWidth, 'height': base.options.targetHeight});
 			base.$image.css({'position': 'absolute', 'top': '0px', 'left': '0px'});
 			initializeDimensions();
 
-			base.$frame.find('.jwc_zoom_in').on('click.'+base.namespace, base.zoomIn);
-			base.$frame.find('.jwc_zoom_out').on('click.'+base.namespace, base.zoomOut);
-			base.$frame.on('mouseenter.'+base.namespace, handleMouseEnter);
-			base.$frame.on('mouseleave.'+base.namespace, handleMouseLeave);
-			base.$image.on('load.'+base.namespace, handeImageLoad);
-			base.$image.on('mousedown.'+base.namespace, handleMouseDown);
+			$('.jwc_zoom_in').on('click.'+base.namespace, base.zoomIn);
+			$('.jwc_zoom_out').on('click.'+base.namespace, base.zoomOut);
+			$('.jwc_frame').on('mouseenter.'+base.namespace, handleMouseEnter);
+			$('.jwc_frame').on('mouseleave.'+base.namespace, handleMouseLeave);
+			$('.jwc_frame').on('load.'+base.namespace, handeImageLoad);
+			$('.jwc_frame').on('mousedown.'+base.namespace, handleMouseDown);
 			$(document).on('mousemove.'+base.namespace, handleMouseMove);
 			$(document).on('mouseup.'+base.namespace, handleMouseUp);
 		};
