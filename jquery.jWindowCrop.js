@@ -31,13 +31,25 @@
 			base.$image.addClass('jwc_image').wrap('<div class="jwc_frame" />'); // wrap image in frame
 			base.$frame = base.$image.parent();
 			base.$frame.append('<div class="jwc_loader">' + base.options.loadingText + '</div>');
-      base.$frame.after('<div class="jwc_controls" style="display:'+(base.options.showControlsOnStart ? 'block' : 'none')+';"><span>click to drag</span><a href="#" class="jwc_zoom_in"></a><a href="#" class="jwc_zoom_out"></a></div>');
+      // base.$frame.after('<div class="jwc_controls" style="display:'+(base.options.showControlsOnStart ? 'block' : 'none')+';"><span>click to drag</span><a href="#" class="jwc_zoom_in"></a><a href="#" class="jwc_zoom_out"></a></div>');
+      base.$frame.after('<input step="' + base.options.zoomSteps + '" class="jwc_slider center-block" value="0" min="0" max="100"  data-val ="0"  type="range"/>');
 			base.$frame.css({'overflow': 'hidden', 'position': 'relative', 'width': base.options.targetWidth, 'height': base.options.targetHeight});
 			base.$image.css({'position': 'absolute', 'top': '0px', 'left': '0px'});
 			initializeDimensions();
 
-			$('.jwc_zoom_in').on('click.'+base.namespace, base.zoomIn);
-			$('.jwc_zoom_out').on('click.'+base.namespace, base.zoomOut);
+			$('.jwc_slider').on('input', function(){
+				oldVal = $(this).data('val');
+				newVal = this.value;
+				if (newVal > oldVal){
+					base.zoomIn();
+				}else{
+					base.zoomOut();
+				}
+				$(this).data('val', this.value);
+			})
+
+			// $('.jwc_zoom_in').on('click.'+base.namespace, base.zoomIn);
+			// $('.jwc_zoom_out').on('click.'+base.namespace, base.zoomOut);
 			$('.jwc_frame').on('mouseenter.'+base.namespace, handleMouseEnter);
 			$('.jwc_frame').on('mouseleave.'+base.namespace, handleMouseLeave);
 			$('.jwc_frame').on('load.'+base.namespace, handeImageLoad);
@@ -51,8 +63,8 @@
 			$(document).unbind(); // remove body binds
 			base.$image.unbind(); // remove image binds
 			base.$frame.unbind(); // remove frame binds
-			base.$frame.find('.jwc_zoom_out').unbind(); // remove zoom triggers
-			base.$frame.find('.jwc_zoom_in').unbind();  // remove zoom triggers
+			// base.$frame.find('.jwc_zoom_out').unbind(); // remove zoom triggers
+			// base.$frame.find('.jwc_zoom_in').unbind();  // remove zoom triggers
 			$('.jwc_loader').remove();   // remove the added text
 			$('.jwc_controls').remove(); // remove the added controls
 			base.$image.removeAttr( 'style' ); // undo the style
