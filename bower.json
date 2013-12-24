@@ -1,0 +1,18 @@
+{
+  "name": "ikhattab-jWindowCrop",
+  "version": "1.0.1",
+  "authors": [
+    "Ihab Khattab <ikhattab@cloud9ers.com>"
+  ],
+  "description": "Image cropping jQuery plugin",
+  "main": "jquery.jWindowCrop.js",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
