@@ -5,7 +5,6 @@
     "Ihab Khattab <ikhattab@cloud9ers.com>"
   ],
   "description": "Image cropping jQuery plugin",
-  "main": "jquery.jWindowCrop.js",
   "license": "MIT",
   "private": true,
   "ignore": [
