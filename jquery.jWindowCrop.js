@@ -1,5 +1,5 @@
 /*
- * jWindowCrop v1.0.0
+ * jWindowCrop v1.0.2
  *
  * Copyright (c) 2012 Tyler Brown
  * Licensed under the MIT license.
@@ -36,17 +36,23 @@
 			base.$frame.css({'overflow': 'hidden', 'position': 'relative', 'width': base.options.targetWidth, 'height': base.options.targetHeight});
 			base.$image.css({'position': 'absolute', 'top': '0px', 'left': '0px'});
 			initializeDimensions();
+			jwSlider =  $('.jwc_slider')
+			if (base.minPercent > 1){
+				jwSlider.hide();
+			}else{
+				jwSlider.show().on('change', function(){
+					oldVal = $(this).data('val');
+					newVal = this.value;
+					if (newVal > oldVal){
+						base.zoomIn();
+					}else{
+						base.zoomOut();
+					}
+					$(this).data('val', this.value);
+				});
+				
+			}
 
-			$('.jwc_slider').on('input', function(){
-				oldVal = $(this).data('val');
-				newVal = this.value;
-				if (newVal > oldVal){
-					base.zoomIn();
-				}else{
-					base.zoomOut();
-				}
-				$(this).data('val', this.value);
-			})
 
 			// $('.jwc_zoom_in').on('click.'+base.namespace, base.zoomIn);
 			// $('.jwc_zoom_out').on('click.'+base.namespace, base.zoomOut);
