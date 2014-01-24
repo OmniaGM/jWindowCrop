@@ -32,7 +32,7 @@
 			base.$frame = base.$image.parent();
 			base.$frame.append('<div class="jwc_loader">' + base.options.loadingText + '</div>');
       // base.$frame.after('<div class="jwc_controls" style="display:'+(base.options.showControlsOnStart ? 'block' : 'none')+';"><span>click to drag</span><a href="#" class="jwc_zoom_in"></a><a href="#" class="jwc_zoom_out"></a></div>');
-      base.$frame.after('<input step="' + base.options.zoomSteps + '" class="jwc_slider center-block" value="0" min="0" max="100"  data-val ="0"  type="range"/>');
+      base.$frame.after('<input step="' + base.options.zoomSteps + '" class="jwc_slider center-block" value="0" min="0" max="90"  data-val ="0"  type="range"/>');
 			base.$frame.css({'overflow': 'hidden', 'position': 'relative', 'width': base.options.targetWidth, 'height': base.options.targetHeight});
 			base.$image.css({'position': 'absolute', 'top': '0px', 'left': '0px'});
 			initializeDimensions();
@@ -40,13 +40,15 @@
 			if (base.minPercent > 1){
 				jwSlider.hide();
 			}else{
-				jwSlider.show().on('change', function(){
+				jwSlider.show().on('input', function(){
 					oldVal = $(this).data('val');
 					newVal = this.value;
-					if (newVal > oldVal){
-						base.zoomIn();
-					}else{
-						base.zoomOut();
+					if (newVal != oldVal){
+						if (newVal > oldVal){
+							base.zoomIn();
+						}else{
+							base.zoomOut();
+						}
 					}
 					$(this).data('val', this.value);
 				});
