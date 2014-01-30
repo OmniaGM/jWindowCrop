@@ -44,11 +44,7 @@
 					oldVal = $(this).data('val');
 					newVal = this.value;
 					if (newVal != oldVal){
-						if (newVal > oldVal){
-							base.zoomIn();
-						}else{
-							base.zoomOut();
-						}
+						newVal > oldVal ? base.zoomIn() : base.zoomOut();
 					}
 					$(this).data('val', this.value);
 				});
