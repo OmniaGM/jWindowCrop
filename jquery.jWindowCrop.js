@@ -40,7 +40,7 @@
 			if (base.minPercent > 1){
 				jwSlider.hide();
 			}else{
-				jwSlider.show().on('change', function(){
+				jwSlider.show().on('input', function(){
 					oldVal = $(this).data('val');
 					newVal = this.value;
 					if (newVal > oldVal){
